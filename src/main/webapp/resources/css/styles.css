@@ -1,0 +1,50 @@
+/* 
+    Created on : Mar 31, 2014, 12:10:20 AM
+    Author     : Carlos Vasquez
+*/
+.bgHeader{
+    background-color:#000;
+}
+
+#header{
+
+    border:solid 0px #fff; /*reset*/
+    border-bottom: solid 1px #EEEEEE;
+    border-bottom-color: #EEEEEE -moz-use-text-color #FFFFFF;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding: 0px;
+    font-size:12px;
+    height: 75px;
+    padding: 4px 0;
+    position: relative;
+}
+
+#logo {
+    text-align: left;
+    width: 30%;
+    padding-left: 10px;
+    position: absolute;
+}
+
+
+#menu{
+    height:39px;
+    overflow: hidden;
+    padding-right:0px;
+    position: absolute;
+    right:0px;
+    top: 15px;
+    width:30%;
+}
+
+.circularProfileImage{
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    border:solid 1px gray;
+/*    background: url(http://link-to-your/image.jpg) no-repeat; */
+/*    box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8); */
+}
