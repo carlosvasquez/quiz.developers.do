@@ -2,11 +2,18 @@ package org.devdom.facebook;
 
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
+import facebook4j.internal.org.json.JSONArray;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.devdom.quiz.model.bean.FacebookController;
+import org.devdom.quiz.model.dto.FacebookProfile;
 
 /**
  *
@@ -23,9 +30,36 @@ public class Callback extends HttpServlet{
         
         try {
             facebook.getOAuthAccessToken(oauthCode);
+            setProfile(request,facebook);
         } catch (FacebookException e) {
             throw new ServletException(e);
         }
         response.sendRedirect(request.getContextPath() + "/");
+    }
+    
+    private void setProfile(HttpServletRequest request, Facebook facebook){
+        FacebookProfile profile = new FacebookProfile();
+        try {
+            String query = "SELECT uid, first_name, last_name, name, birthday_date, email, pic_big, sex FROM user WHERE uid = me() ";
+            JSONArray jsonArray = facebook.executeFQL(query);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject;
+                try {
+                    jsonObject = jsonArray.getJSONObject(i);                    
+                    profile.setFirstName(jsonObject.getString("first_name"));
+                    profile.setLastName(jsonObject.getString("last_name"));
+                    profile.setEmail(jsonObject.getString("email"));
+                    profile.setBirthday_date(jsonObject.getString("birthday_date"));
+                    profile.setPic_with_logo(jsonObject.getString("pic_big"));
+                    profile.setSex(jsonObject.getString("sex"));
+                    request.getSession().setAttribute("profile", profile);
+                } catch (JSONException ex) {
+                    Logger.getLogger(FacebookController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (FacebookException ex) {
+            Logger.getLogger(FacebookController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
