@@ -5,7 +5,6 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     <application> </application> 
-
     <navigation-rule>
         <navigation-case>
             <from-outcome>welcome</from-outcome>
@@ -16,6 +15,12 @@
         <navigation-case>
             <from-outcome>Signin_Facebook</from-outcome>
             <redirect>/signin</redirect>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>New_Quiz</from-outcome>
+            <redirect>/quiz/new.xhtml</redirect>
         </navigation-case>
     </navigation-rule>
 </faces-config>

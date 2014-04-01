@@ -11,5 +11,9 @@
         <managed-bean-class>org.devdom.quiz.model.bean.FacebookController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
-
+    <managed-bean>
+        <managed-bean-name>admin</managed-bean-name>
+        <managed-bean-class>org.devdom.quiz.model.bean.AdminMenu</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>
