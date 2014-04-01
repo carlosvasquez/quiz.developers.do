@@ -28,16 +28,14 @@
                     <ui:insert name="header">
                         <ui:include src="template/header.xhtml" />
                     </ui:insert>
-                    <c:choose>                        
+                    <c:choose>
                         <c:when test="#{fbconnect.logged}">
                             <ui:insert name="content">
-                                <ui:include src="content.xhtml" />
+                                <ui:include src="panel.xhtml" />
                             </ui:insert>
                         </c:when>
                         <c:otherwise>
-                            <ui:insert name="content">
-                                <ui:include src="login.xhtml" />
-                            </ui:insert>
+                            <ui:include src="login.xhtml" />
                         </c:otherwise>
                     </c:choose>
                     <ui:insert name="menu">

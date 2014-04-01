@@ -3,16 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
         <ui:composition>
             <p:layoutUnit id="header" position="north" size="80">
                 <div id="logo" style="padding-top:15px;"><img src="http://developers.do/wp-content/uploads/2012/06/logo.png"/></div>
-                <p:tabMenu id="menu" activeIndex="0">
-                    <p:menuitem value="Inicio" url="/index.xhtml" icon="ui-icon-home" />
-                    <p:menuitem value="Perfil" url="/profile.xhtml" icon="ui-icon-person" />
-                    <p:menuitem value="Administraciòn" url="/admin.xhtml" icon="ui-icon-wrench"/>
-                </p:tabMenu>
+                <c:choose>                        
+                    <c:when test="#{fbconnect.logged}">
+                        #{admin.activeIndex}
+                        <p:tabMenu id="menu" activeIndex="#{admin.activeIndex}">
+                            <p:menuitem value="Inicio" url="/index.xhtml" icon="ui-icon-home" />
+                            <p:menuitem value="Perfil" url="/profile.xhtml" icon="ui-icon-person" />
+                            <p:menuitem value="Administraciòn" url="/admin.xhtml" icon="ui-icon-wrench"/>
+                        </p:tabMenu>
+                    </c:when>
+                </c:choose>
             </p:layoutUnit>
         </ui:composition>
     </h:body>
