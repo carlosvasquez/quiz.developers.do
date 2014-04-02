@@ -1,13 +1,11 @@
 package org.devdom.quiz.util;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 /**
  *
- * @author Carlos Vásquez Polanco
+ * @author Carlos Vasquez Polanco
  */
 public class EntityManagerFactory{
     
@@ -17,9 +15,8 @@ public class EntityManagerFactory{
     public EntityManagerFactory(){
         emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT, Configuration.JPAConfig());
     }
-   
+
     public EntityManager getEntityManager(){
         return emf.createEntityManager();
     }
-   
 }
