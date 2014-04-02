@@ -3,7 +3,8 @@
   <persistence-unit name="quiz_pu" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>org.devdom.quiz.model.dto.Quiz</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>org.devdom.quiz.model.dto.Developer</class>
+    <validation-mode>CALLBACK</validation-mode>
     <properties>
       <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
     </properties>
