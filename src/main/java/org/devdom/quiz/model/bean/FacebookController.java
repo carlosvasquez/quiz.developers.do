@@ -49,6 +49,7 @@ public class FacebookController implements Serializable{
     public boolean isAuthorized(){
         facesContext = FacesContext.getCurrentInstance();
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        System.out.println(" authorized "+ session.getAttribute("quiz_authorized"));
         return Boolean.getBoolean(session.getAttribute("quiz_authorized").toString());
     }
 

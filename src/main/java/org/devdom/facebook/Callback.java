@@ -6,6 +6,7 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.devdom.quiz.model.bean.FacebookController;
+import org.devdom.quiz.model.dao.DeveloperDao;
+import org.devdom.quiz.model.dto.Developer;
 import org.devdom.quiz.model.dto.FacebookProfile;
 
 /**
@@ -46,7 +49,8 @@ public class Callback extends HttpServlet{
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject;
                 try {
-                    jsonObject = jsonArray.getJSONObject(i);                    
+                    jsonObject = jsonArray.getJSONObject(i);
+                    profile.setUid(jsonObject.getLong("uid"));
                     profile.setFirstName(jsonObject.getString("first_name"));
                     profile.setLastName(jsonObject.getString("last_name"));
                     profile.setEmail(jsonObject.getString("email"));
@@ -58,8 +62,19 @@ public class Callback extends HttpServlet{
                     Logger.getLogger(FacebookController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            
+            DeveloperDao developerDao = new DeveloperDao();
+            List<Developer> developer = developerDao.findProfileAuthorizationByFBId(profile.getUid());
+
+            if(developer.size()>0){
+                request.getSession().setAttribute("devdo_member", (!"".equals(developer.get(0).getFirstName())));
+                request.getSession().setAttribute("quiz_authorized", developer.get(0).isQuizAuthorized());
+                request.getSession().setAttribute("quiz_auth_code", developer.get(0).getAuthorizationCode());
+            }
         } catch (FacebookException ex) {
             Logger.getLogger(FacebookController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Callback.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
