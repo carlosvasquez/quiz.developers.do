@@ -30,9 +30,22 @@
                     </ui:insert>
                     <c:choose>                        
                         <c:when test="#{fbconnect.logged}">
+                            <c:choose>
+                                <c:when test="#{fbconnect.authorized}">
+                                    <ui:insert name="content">
+                                        <ui:include src="content.xhtml" />
+                                    </ui:insert>
+                                </c:when>
+                                <c:otherwise>
+                                    <ui:insert name="verifyAcoount">
+                                        <ui:include src="verifyAccount.xhtml" />
+                                    </ui:insert>
+                                </c:otherwise>
+                            </c:choose>
                             <ui:insert name="content">
                                 <ui:include src="content.xhtml" />
                             </ui:insert>
+                            
                         </c:when>
                         <c:otherwise>
                             <ui:insert name="content">
