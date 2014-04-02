@@ -1,5 +1,6 @@
 package org.devdom.quiz.model.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import org.devdom.quiz.model.dto.Developer;
 import org.devdom.quiz.util.EntityManagerFactory;
@@ -20,14 +21,13 @@ public class DeveloperDao {
         return emf.getEntityManager();
     }
     
-    public Developer findProfileAuthorizationByFBId(Long uid) throws Exception{
+    public List<Developer> findProfileAuthorizationByFBId(Long uid) throws Exception{
         EntityManager em = getEntityManager();
         try{
-            return (Developer) em.createNamedQuery("Developer.findProfileAuthorizationByFBId")
+            return (List<Developer>) em.createNamedQuery("Developer.findProfileAuthorizationByFBId")
                     .setParameter("fb_id", uid)
-                    .getSingleResult();
+                    .getResultList();
         }finally{
-            System.out.println("entro de todos modos al finally");
             if (em != null) {
                 em.close();
             }
