@@ -8,6 +8,7 @@ import facebook4j.internal.org.json.JSONObject;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -27,6 +28,29 @@ public class FacebookController implements Serializable{
     
     private FacesContext facesContext = FacesContext.getCurrentInstance();
     private HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+    
+    @PostConstruct
+    public void init(){
+        // TODO
+    }
+
+    public String getAuthorizationCode(){
+        facesContext = FacesContext.getCurrentInstance();
+        session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        return session.getAttribute("quiz_auth_code").toString();
+    }
+
+    public boolean isDevdoMember(){
+        facesContext = FacesContext.getCurrentInstance();
+        session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        return Boolean.getBoolean(session.getAttribute("devdo_member").toString());
+    }
+    
+    public boolean isAuthorized(){
+        facesContext = FacesContext.getCurrentInstance();
+        session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        return Boolean.getBoolean(session.getAttribute("quiz_authorized").toString());
+    }
 
     public boolean isLogged(){
         facesContext = FacesContext.getCurrentInstance();
