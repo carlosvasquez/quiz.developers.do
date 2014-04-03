@@ -1,8 +1,11 @@
 package org.devdom.quiz.model.bean;
 
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -28,8 +31,10 @@ public class ValidationCode  implements Serializable{
         this.code = code;
     }
     
-    public void check(){
-        System.out.println();
+    public void check(ActionEvent actionEvent) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        
+        facesContext.addMessage(null, new FacesMessage("codigo " + code + " verificado!"));
     }
     
     public void display(){
