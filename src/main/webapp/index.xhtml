@@ -42,10 +42,6 @@
                                     </ui:insert>
                                 </c:otherwise>
                             </c:choose>
-                            <ui:insert name="content">
-                                <ui:include src="content.xhtml" />
-                            </ui:insert>
-                            
                         </c:when>
                         <c:otherwise>
                             <ui:insert name="content">
@@ -53,9 +49,11 @@
                             </ui:insert>
                         </c:otherwise>
                     </c:choose>
-                    <ui:insert name="menu">
-                        <ui:include src="template/menu.xhtml" />
-                    </ui:insert>
+                    <c:if test="#{fbconnect.authorized}">
+                        <ui:insert name="menu">
+                            <ui:include src="template/menu.xhtml" />
+                        </ui:insert>
+                    </c:if>
                     <ui:insert name="footer">
                         <ui:include src="template/footer.xhtml" />
                     </ui:insert>
