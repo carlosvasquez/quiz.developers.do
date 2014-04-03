@@ -67,9 +67,11 @@ public class Callback extends HttpServlet{
             List<Developer> developer = developerDao.findProfileAuthorizationByFBId(profile.getUid());
 
             if(developer.size()>0){
-                request.getSession().setAttribute("devdo_member", (!"".equals(developer.get(0).getFirstName())));
+                request.getSession().setAttribute("devdo_member",true);
                 request.getSession().setAttribute("quiz_authorized", developer.get(0).isQuizAuthorized());
                 request.getSession().setAttribute("quiz_auth_code", developer.get(0).getAuthorizationCode());
+            }else{
+                request.getSession().setAttribute("devdo_member",false);
             }
         } catch (FacebookException ex) {
             Logger.getLogger(FacebookController.class.getName()).log(Level.SEVERE, null, ex);
