@@ -16,4 +16,9 @@
         <managed-bean-class>org.devdom.quiz.model.bean.AdminMenu</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>validateCode</managed-bean-name>
+        <managed-bean-class>org.devdom.quiz.model.bean.ValidationCode</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>
