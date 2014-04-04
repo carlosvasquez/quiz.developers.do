@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:view>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title>quiz.developers.do</title>
+            <link rel="stylesheet" type="text/css" href="../faces/jsfcrud.css" />
+        </head>
+        <body>
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h1>Nueva Pregunta</h1>
+            <h:form>
+                <h:inputHidden id="validateCreateField" validator="#{quizBean.validateCreate}" value="value"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Nombre de encuesta"/>
+                    <h:inputText id="name" value="#{quizBean.quiz.name}" title="Nombres del cuestionario" required="true"  requiredMessage="Debes indicar un nombre para la encuesta"/>
+                </h:panelGrid>
+                <br />
+                <h:commandButton action="#{quizBean.create}" value="Crear"/>
+                <br />
+                <br />
+                <h:commandLink action="#{quizBean.listAll()}" value="Mostrar todas las preguntas creadas" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="Index" action="welcome" immediate="true" />
+
+            </h:form>
+        </body>
+    </f:view>
+</html>
