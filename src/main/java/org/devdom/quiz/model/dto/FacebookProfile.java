@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class FacebookProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Long uid;
+    private long uid = 0;
     private String firstName;
     private String lastName;
     private String birthday_date;
@@ -20,14 +20,14 @@ public class FacebookProfile implements Serializable {
     /**
      * @return the uid
      */
-    public Long getUid() {
+    public long getUid() {
         return uid;
     }
 
     /**
      * @param uid the uid to set
      */
-    public void setUid(Long uid) {
+    public void setUid(long uid) {
         this.uid = uid;
     }
 
