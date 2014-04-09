@@ -1,4 +1,4 @@
-package org.devdom.facebook;
+package org.devdom.client.facebook;
 
 import facebook4j.Facebook;
 import facebook4j.FacebookException;

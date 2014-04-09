@@ -1,4 +1,4 @@
-package org.devdom.facebook;
+package org.devdom.client.facebook;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
