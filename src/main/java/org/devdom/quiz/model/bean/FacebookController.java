@@ -28,11 +28,6 @@ public class FacebookController implements Serializable{
     
     private FacesContext facesContext = FacesContext.getCurrentInstance();
     private HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-    
-    @PostConstruct
-    public void init(){
-        // TODO
-    }
 
     public String getAuthorizationCode(){
         facesContext = FacesContext.getCurrentInstance();
@@ -43,14 +38,19 @@ public class FacebookController implements Serializable{
     public boolean isDevdoMember(){
         facesContext = FacesContext.getCurrentInstance();
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        return Boolean.getBoolean(session.getAttribute("devdo_member").toString());
+        return (boolean) session.getAttribute("devdo_member");
+    }
+    
+    public void setAuthorized(){
+        facesContext = FacesContext.getCurrentInstance();
+        session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        session.setAttribute("quiz_authorized", true);
     }
     
     public boolean isAuthorized(){
         facesContext = FacesContext.getCurrentInstance();
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        System.out.println(" authorized "+ session.getAttribute("quiz_authorized"));
-        return Boolean.getBoolean(session.getAttribute("quiz_authorized").toString());
+        return (session.getAttribute("quiz_authorized") == null)?false: (boolean) session.getAttribute("quiz_authorized");
     }
 
     public boolean isLogged(){
@@ -69,6 +69,12 @@ public class FacebookController implements Serializable{
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
         FacebookProfile profile = (FacebookProfile) session.getAttribute("profile");
         return profile.getFirstName() + " " + profile.getLastName();
+    }
+
+    public long getFacebookID(){
+        session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        FacebookProfile profile = (FacebookProfile) session.getAttribute("profile");
+        return profile.getUid();
     }
 
     public String connect(){
