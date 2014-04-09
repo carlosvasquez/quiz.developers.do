@@ -6,11 +6,11 @@
     <version>0.3</version>
     <packaging>war</packaging>
     <name>quiz_developer_do</name>
-    <url>http://quiz.developers.do</url>    
+    <url>http://quiz.developers.do</url>
     <organization>
         <name>Developers Dominicanos</name>
         <url>http://developers.do</url>
-    </organization> 
+    </organization>
     <scm>
         <url>https://github.com/carlosvasquez/quiz.developers.do.git</url>
     </scm>
