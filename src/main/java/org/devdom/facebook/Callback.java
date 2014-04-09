@@ -6,7 +6,6 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -64,12 +63,12 @@ public class Callback extends HttpServlet{
             }
             
             DeveloperDao developerDao = new DeveloperDao();
-            List<Developer> developer = developerDao.findProfileAuthorizationByFBId(profile.getUid());
+            Developer developer = developerDao.findProfileAuthorizationByFBId(profile.getUid());
 
-            if(developer.size()>0){
+            if(developer.getUid()!=0){
                 request.getSession().setAttribute("devdo_member",true);
-                request.getSession().setAttribute("quiz_authorized", developer.get(0).isQuizAuthorized());
-                request.getSession().setAttribute("quiz_auth_code", developer.get(0).getAuthorizationCode());
+                request.getSession().setAttribute("quiz_authorized", developer.isQuizAuthorized());
+                request.getSession().setAttribute("quiz_auth_code", developer.getAuthorizationCode());
             }else{
                 request.getSession().setAttribute("devdo_member",false);
             }
