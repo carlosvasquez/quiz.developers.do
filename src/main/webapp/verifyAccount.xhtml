@@ -9,49 +9,35 @@
     <h:body>
         <ui:composition>
             <p:layoutUnit position="center">                        
-                <h:form> 
+                
                     <c:choose>
                         <c:when test="#{fbconnect.devdoMember}">
-                            
-                            
-                            <br/><br/>
-                            
-                            
-                                <p:panel id="panel" header="Validar cuenta">
- 
-                                    <p:messages id="msgs"/>
-
-                                    <h:panelGrid columns="3" cellpadding="5">
-                                        <h:outputLabel for="code" value="Codigo de authorizacion *" />
-                                        <p:inputText id="code"
-                                                     value="#{validateCode.code}"
-                                                required="true" label="code">
-                                            <f:validateLength minimum="5" />
+                            <h:form id="validate">
+                            <br/>
+                                <p:panel header="Validaciòn de còdigo de seguridad">
+                                    <h:panelGrid id="grid" columns="2" style="margin-bottom:10px">  
+                                        <f:facet name="header">  
+                                            <p:messages id="msg" />  
+                                        </f:facet>
+                                        <h:outputLabel for="code" value="Còdigo > " />  
+                                        <p:inputText id="code" value="#{validateCode.code}" required="true">
+                                            <f:validateLength minimum="5"/>
                                         </p:inputText>
-                                        <p:message for="code" />
+
+                                        <p:commandButton ajax="false" value="verificar" id="btnCode" action="#{validateCode.check(actionEvent)}" actionListener="update"/> 
+                                        <h:outputText value="#{validateCode.code}" id="display" />
+                                        
                                     </h:panelGrid>
-
-                                    <p:commandButton value="Global" update="panel"
-                                                     actionListener="#{validateCode.check}"
-                                            id="btnGlobal" />
-                                    <p:commandButton value="Non-Global" update="panel"
-                                                     actionListener="#{validateCode.check}"
-                                            id="btnNonGlobal"
-                                            global="false" style="margin-left:5px"/>
-
+                                    
                                 </p:panel>
-                            
-                            
-                            
-                            
-                            
+                            </h:form>
                         </c:when>
                         <c:otherwise>
                             Por el momento esta aplicacion es para los miembros del grupo Developers Dominicanos
                         </c:otherwise>
                     </c:choose>
                     <br />
-                </h:form>
+                
             </p:layoutUnit>
         </ui:composition>
     </h:body>
