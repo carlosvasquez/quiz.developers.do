@@ -49,7 +49,7 @@ public class Developer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "uid")
-    private Long uid;
+    private long uid = 0;
     
     @Column(name = "user_id")
     private Long userId;
@@ -105,14 +105,14 @@ public class Developer implements Serializable {
     /**
      * @return the uid
      */
-    public Long getUid() {
+    public long getUid() {
         return uid;
     }
 
     /**
      * @param uid the uid to set
      */
-    public void setUid(Long uid) {
+    public void setUid(long uid) {
         this.uid = uid;
     }
 

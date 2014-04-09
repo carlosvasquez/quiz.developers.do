@@ -1,6 +1,5 @@
 package org.devdom.quiz.model.dao;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import org.devdom.quiz.model.dto.Developer;
 import org.devdom.quiz.util.EntityManagerFactory;
@@ -21,12 +20,12 @@ public class DeveloperDao {
         return emf.getEntityManager();
     }
     
-    public List<Developer> findProfileAuthorizationByFBId(Long uid) throws Exception{
+    public Developer findProfileAuthorizationByFBId(Long uid) throws Exception, ClassCastException{
         EntityManager em = getEntityManager();
         try{
-            return (List<Developer>) em.createNamedQuery("Developer.findProfileAuthorizationByFBId")
+            return (Developer) em.createNamedQuery("Developer.findProfileAuthorizationByFBId")
                     .setParameter("fb_id", uid)
-                    .getResultList();
+                    .getSingleResult();
         }finally{
             if (em != null) {
                 em.close();
@@ -34,7 +33,7 @@ public class DeveloperDao {
         }
     }
     
-    public Developer updAuthorizationByUidAndAuthorizationCode(Long uid, String authorizationCode){
+    public Developer updAuthorizationByUidAndAuthorizationCode(long uid, String authorizationCode) throws Exception{
         EntityManager em = getEntityManager();
         try{
             return (Developer) em.createNamedQuery("Developer.updAuthorizationByUidAndAuthorizationCode")
