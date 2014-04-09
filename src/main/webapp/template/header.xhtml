@@ -11,7 +11,6 @@
                 <div id="logo" style="padding-top:15px;"><img src="http://developers.do/wp-content/uploads/2012/06/logo.png"/></div>
                 <c:choose>                        
                     <c:when test="#{fbconnect.logged}">
-                        #{admin.activeIndex}
                         <p:tabMenu id="menu" activeIndex="#{admin.activeIndex}">
                             <p:menuitem value="Inicio" url="/index.xhtml" icon="ui-icon-home" />
                             <p:menuitem value="Perfil" url="/profile.xhtml" icon="ui-icon-person" />
