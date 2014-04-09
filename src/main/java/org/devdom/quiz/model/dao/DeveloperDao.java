@@ -33,4 +33,18 @@ public class DeveloperDao {
             }
         }
     }
+    
+    public Developer updAuthorizationByUidAndAuthorizationCode(Long uid, String authorizationCode){
+        EntityManager em = getEntityManager();
+        try{
+            return (Developer) em.createNamedQuery("Developer.updAuthorizationByUidAndAuthorizationCode")
+                    .setParameter("fb_id", uid)
+                    .setParameter("authorization_code", authorizationCode)
+                    .getSingleResult();
+        }finally{
+            if(em != null){
+                em.close();
+            }
+        }
+    }
 }
