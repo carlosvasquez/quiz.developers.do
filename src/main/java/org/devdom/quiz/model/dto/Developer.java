@@ -28,6 +28,19 @@ import org.eclipse.persistence.annotations.StoredProcedureParameter;
                                                                       name="fb_id",
                                                                       direction=Direction.IN,
                                                                       type=String.class)}
+                                ),
+    @NamedStoredProcedureQuery( name="Developer.updAuthorizationByUidAndAuthorizationCode", 
+                                procedureName="updAuthorizationByUidAndAuthorizationCode",
+                                returnsResultSet=true,
+                                resultClass=Developer.class,
+                                parameters={@StoredProcedureParameter(queryParameter="fb_id",
+                                                                      name="fb_id",
+                                                                      direction=Direction.IN,
+                                                                      type=Long.class),
+                                            @StoredProcedureParameter(queryParameter="authorization_code",
+                                                                      name="authorization_code",
+                                                                      direction=Direction.IN,
+                                                                      type=String.class)}
                                 )
 })
 public class Developer implements Serializable {
