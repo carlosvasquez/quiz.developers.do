@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition>
+            <p:layoutUnit position="center">
+                    <c:choose>
+                        <c:when test="#{fbconnect.devdoMember}">
+                            <h:form id="validate">
+                            <br/>
+                                <p:panel header="Validaciòn de còdigo de seguridad">
+                                    <h:panelGrid id="grid" columns="2" style="margin-bottom:10px">  
+                                        <f:facet name="header">  
+                                            <p:messages id="msg" />  
+                                        </f:facet>
+                                        <h:outputLabel for="code" value="Còdigo > " />
+                                        <p:inputText id="code" value="#{validateCode.code}" required="true">
+                                            <f:validateLength minimum="5"/>
+                                        </p:inputText>
+
+                                        <p:commandButton ajax="false" value="verificar" id="btnCode" action="#{validateCode.check(actionEvent)}" actionListener="update"/> 
+                                        <h:outputText value="#{validateCode.code}" id="display" />
+                                        
+                                    </h:panelGrid>
+                                    
+                                </p:panel>
+                            </h:form>
+                        </c:when>
+                        <c:otherwise>
+                            Por el momento esta aplicacion es para los miembros del grupo Developers Dominicanos
+                        </c:otherwise>
+                    </c:choose>
+                    <br />
+                
+            </p:layoutUnit>
+        </ui:composition>
+    </h:body>
+</html>

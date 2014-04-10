@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+        <f:view contentType="text/html">
+            <h:head>
+                <f:facet name="first">
+                    <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                    <title>quiz.developers.do</title>
+                    <h:outputStylesheet library="css" name="styles.css"/>
+                </f:facet>
+                <style type="text/css">
+                    .ui-layout-north {
+                        z-index:20 !important;
+                        overflow:visible !important;;
+                    }
+                    .ui-layout-north .ui-layout-unit-content {
+                        overflow:visible !important;
+                    }
+                </style>
+            </h:head>
+            <h:body>
+                    <p:layout fullPage="true">
+                        <ui:insert name="header">
+                            <ui:include src="template/header.xhtml" />
+                        </ui:insert>
+                        <c:choose>                        
+                            <c:when test="#{fbconnect.logged}">
+                                <c:choose>
+                                    <c:when test="#{fbconnect.authorized}">
+                                        <ui:insert name="content">
+                                            <ui:include src="content.xhtml" />
+                                        </ui:insert>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <ui:insert name="verifyAcoount">
+                                            <ui:include src="verifyAccount.xhtml" />
+                                        </ui:insert>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:when>
+                            <c:otherwise>
+                                <ui:insert name="login">
+                                    <ui:include src="login.xhtml" />
+                                </ui:insert>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:if test="#{fbconnect.authorized}">
+                            <ui:insert name="menu">
+                                <ui:include src="template/menu.xhtml" />
+                            </ui:insert>
+                        </c:if>
+                        <ui:insert name="footer">
+                            <ui:include src="template/footer.xhtml" />
+                        </ui:insert>
+                    </p:layout>
+            </h:body>
+        </f:view>
+    </html>      
