@@ -26,7 +26,7 @@
             <h:body>
                     <p:layout fullPage="true">
                         <ui:insert name="header">
-                            <ui:include src="template/header.xhtml" />
+                            <ui:include src="../template/header.xhtml" />
                         </ui:insert>
                         <c:choose>                        
                             <c:when test="#{fbconnect.logged}">
@@ -51,11 +51,11 @@
                         </c:choose>
                         <c:if test="#{fbconnect.authorized}">
                             <ui:insert name="menu">
-                                <ui:include src="template/menu.xhtml" />
+                                <ui:include src="../template/menu.xhtml" />
                             </ui:insert>
                         </c:if>
                         <ui:insert name="footer">
-                            <ui:include src="template/footer.xhtml" />
+                            <ui:include src="../template/footer.xhtml" />
                         </ui:insert>
                     </p:layout>
             </h:body>
