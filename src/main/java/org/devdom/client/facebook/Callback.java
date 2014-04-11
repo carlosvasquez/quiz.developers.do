@@ -69,7 +69,7 @@ public class Callback extends HttpServlet{
                 request.getSession().setAttribute("devdo_member",true);
                 request.getSession().setAttribute("quiz_authorized", developer.isQuizAuthorized());
                 request.getSession().setAttribute("quiz_auth_code", developer.getAuthorizationCode());
-                request.getSession().setAttribute("user_roles", developer.getAuthorizationCode());
+                request.getSession().setAttribute("user_roles", developer.getRoles());
             }else{
                 request.getSession().setAttribute("devdo_member",false);
             }
