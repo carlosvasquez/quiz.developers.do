@@ -6,14 +6,16 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import org.devdom.quiz.model.dto.Developer;
 import org.devdom.quiz.model.dto.FacebookProfile;
+import org.devdom.quiz.util.Configuration;
 
 /**
  *
@@ -33,6 +35,49 @@ public class FacebookController implements Serializable{
         facesContext = FacesContext.getCurrentInstance();
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
         return session.getAttribute("quiz_auth_code").toString();
+    }
+
+    public String[] getRoles(){
+        facesContext = FacesContext.getCurrentInstance();
+        session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        if(session.getAttribute("user_roles")==null){
+            return new String[] {"1;ver"};
+        }
+        String roles = session.getAttribute("user_roles").toString();
+        return roles.split("\\,");
+    }
+    
+    public boolean roleBuilder(int active){
+        String[] roles = getRoles();
+        for(String role : roles){
+            if(Integer.parseInt(role.split("\\;")[0])==active)
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean isViewer(){
+        return roleBuilder(Configuration.ROLE_VIEWER);
+    }
+    
+    public boolean isCompetitor(){
+        return roleBuilder(Configuration.ROLE_COMPETITOR);
+    }
+    
+    public boolean isEditor(){
+        return roleBuilder(Configuration.ROLE_EDITOR);
+    }
+    
+    public boolean isCreator(){
+        return roleBuilder(Configuration.ROLE_CREATOR);
+    }
+    
+    public boolean isOwner(){
+        return roleBuilder(Configuration.ROLE_OWNER);
+    }
+    
+    public boolean isAdministrator(){
+        return roleBuilder(Configuration.ROLE_ADMINISTRATOR);
     }
 
     public boolean isDevdoMember(){
