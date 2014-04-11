@@ -5,7 +5,7 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     <application> </application> 
-
+    
     <managed-bean>
         <managed-bean-name>fbconnect</managed-bean-name>
         <managed-bean-class>org.devdom.quiz.model.bean.FacebookController</managed-bean-class>
@@ -21,4 +21,26 @@
         <managed-bean-class>org.devdom.quiz.model.bean.ValidationCode</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>quizBean</managed-bean-name>
+        <managed-bean-class>org.devdom.quiz.model.bean.QuizController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>welcome</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>administration</from-outcome>
+            <to-view-id>admin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>
