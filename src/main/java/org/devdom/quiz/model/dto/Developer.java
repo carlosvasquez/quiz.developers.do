@@ -66,6 +66,9 @@ public class Developer implements Serializable {
     @Column(name = "authorization_code")
     private String authorizationCode;
     
+    @Column(name = "roles")
+    private String roles;
+    
     public Long getId() {
         return getUid();
     }
@@ -156,6 +159,20 @@ public class Developer implements Serializable {
      */
     public void setAuthorizationCode(String authorizationCode) {
         this.authorizationCode = authorizationCode;
+    }
+
+    /**
+     * @return the roles
+     */
+    public String getRoles() {
+        return roles;
+    }
+
+    /**
+     * @param roles the roles to set
+     */
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
     
     
