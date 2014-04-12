@@ -1,28 +1,24 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <h:body>
-        <ui:composition>
-            <p:layoutUnit id="header" position="north" size="80">
-                <h:form>
-                    <div id="logo" style="padding-top:15px;"><img src="http://developers.do/wp-content/uploads/2012/06/logo.png"/></div>
-                    <c:choose>                        
-                        <c:when test="#{fbconnect.logged}">
-                            <p:tabMenu id="menu" activeIndex="#{admin.activeIndex}">
-                                <p:menuitem value="Inicio" action="welcome" icon="ui-icon-home" />
-                                <p:menuitem value="Perfil" action="profile" icon="ui-icon-person" />
-                                <c:if test="#{fbconnect.administrator or fbconnect.creator or fbconnect.editor or fbconnect.owner}">
-                                    <p:menuitem value="Administraciòn" action="administration" icon="ui-icon-wrench"/>
-                                </c:if>
-                            </p:tabMenu>
-                        </c:when>
-                    </c:choose>
-                </h:form>
-            </p:layoutUnit>
-        </ui:composition>
-    </h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <p:layoutUnit position="north" size="120" closable="true" collapsible="true">
+        <h:form>
+            <div id="logo" style="padding-top:15px;"><img src="http://developers.do/wp-content/uploads/2012/06/logo.png"/></div>
+            <div id="top-menu">
+                <c:choose>                        
+                    <c:when test="#{fbconnect.logged}">
+                        <p:tabMenu activeIndex="#{admin.activeIndex}">
+                            <p:menuitem value="Inicio" action="welcome" icon="ui-icon-home" />
+                            <p:menuitem value="Perfil" action="profile" icon="ui-icon-person" />
+                            <c:if test="#{fbconnect.administrator or fbconnect.creator or fbconnect.editor or fbconnect.owner}">
+                                <p:menuitem value="Administraciòn" action="administration" icon="ui-icon-wrench"/>
+                            </c:if>
+                        </p:tabMenu>
+                    </c:when>
+                </c:choose>
+            </div>
+        </h:form>
+    </p:layoutUnit>
+</ui:composition>
