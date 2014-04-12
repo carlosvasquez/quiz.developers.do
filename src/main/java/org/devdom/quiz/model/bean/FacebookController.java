@@ -105,18 +105,29 @@ public class FacebookController implements Serializable{
     public String getProfilePicture(){
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
         FacebookProfile profile = (FacebookProfile) session.getAttribute("profile");
+        if(profile==null)
+            return "";
+        if(profile.getPic_with_logo()==null)
+            return "";
         return profile.getPic_with_logo();
     }
     
     public String getLoggedName(){
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
         FacebookProfile profile = (FacebookProfile) session.getAttribute("profile");
+        System.out.println("profile --> " + profile);
+        if(profile==null)
+            return "";
+        if(profile.getFirstName()==null || profile.getLastName()==null)
+            return "";
         return profile.getFirstName() + " " + profile.getLastName();
     }
 
     public long getFacebookID(){
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
         FacebookProfile profile = (FacebookProfile) session.getAttribute("profile");
+        if(profile==null)
+            return 0;
         return profile.getUid();
     }
 
