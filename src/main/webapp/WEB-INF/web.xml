@@ -3,15 +3,15 @@
     <display-name>Quiz-Developers-Dominicanos</display-name>
     <servlet>
         <servlet-name>signin</servlet-name>
-        <servlet-class>org.devdom.facebook.SignIn</servlet-class>
+        <servlet-class>org.devdom.client.facebook.SignIn</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>callback</servlet-name>
-        <servlet-class>org.devdom.facebook.Callback</servlet-class>
+        <servlet-class>org.devdom.client.facebook.Callback</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>logout</servlet-name>
-        <servlet-class>org.devdom.facebook.Logout</servlet-class>
+        <servlet-class>org.devdom.client.facebook.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
@@ -46,10 +46,12 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
     <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/index.xhtml</location>
-    </error-page>
+    </error-page> 
+
     <error-page>
         <exception-type>facebook4j.FacebookException</exception-type>
         <location>/error.xhtml</location>
@@ -57,4 +59,4 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-</web-app>
+    </web-app>
