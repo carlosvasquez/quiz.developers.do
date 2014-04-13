@@ -13,7 +13,7 @@
                             <p:menuitem value="Inicio" action="welcome" icon="ui-icon-home" />
                             <p:menuitem value="Perfil" action="profile" icon="ui-icon-person" />
                             <c:if test="#{fbconnect.administrator or fbconnect.creator or fbconnect.editor or fbconnect.owner}">
-                                <p:menuitem value="Administraciòn" action="administration" icon="ui-icon-wrench"/>
+                                <p:menuitem value="Administraciòn" outcome="administration" icon="ui-icon-wrench"/>
                             </c:if>
                         </p:tabMenu>
                     </c:when>
