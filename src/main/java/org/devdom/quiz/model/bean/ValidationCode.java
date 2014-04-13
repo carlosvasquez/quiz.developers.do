@@ -55,15 +55,7 @@ public class ValidationCode  implements Serializable{
                     fbController.setAuthorized();
 
                     facesContext.addMessage("display", new FacesMessage("codigo autorizado!"));
-                    facesContext.getViewRoot().setViewId("viewID");
-                    /*
-                    if(authorized){
-                        facesContext.addMessage("display", new FacesMessage("codigo autorizado!"));
-                        fbController.setAuthorized();
-                    }else{
-                        facesContext.addMessage("display", new FacesMessage(FacesMessage.SEVERITY_ERROR, "codigo "+code+" es invàlido!", ""));
-                    }
-                    */
+                    facesContext.getViewRoot().setViewId("/index.xhtml");
                 }else{
                     facesContext.addMessage("display", new FacesMessage(FacesMessage.SEVERITY_ERROR, "codigo "+code+" es invàlido2", " +2"));
                 }
