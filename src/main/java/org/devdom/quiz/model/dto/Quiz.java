@@ -50,6 +50,15 @@ public class Quiz implements Serializable {
     @NotNull
     @Column(name = "owner")
     private int owner;
+    @Column(name = "user_id")
+    private int userId;
+    @Column(name = "full_name")
+    private String fullName;
+    @Column(name = "status_id")
+    private int statusId;
+    @Column(name = "status")
+    private String status;
+            
 
     public Quiz() {
     }
@@ -64,12 +73,82 @@ public class Quiz implements Serializable {
         this.owner = owner;
     }
 
-    public Integer getQuizId() {
+        /**
+     * @return the id
+     */
+    public Integer getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * @return the fullName
+     */
+    public String getFullName() {
+        return fullName;
+    }
+
+    /**
+     * @param fullName the fullName to set
+     */
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    /**
+     * @return the statusId
+     */
+    public int getStatusId() {
+        return statusId;
+    }
+
+    /**
+     * @param statusId the statusId to set
+     */
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    public Integer getQuizId() {
+        return getId();
+    }
+
     public void setQuizId(Integer quizId) {
-        this.id = quizId;
+        this.setId(quizId);
     }
 
     public String getName() {
@@ -99,7 +178,7 @@ public class Quiz implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -110,7 +189,7 @@ public class Quiz implements Serializable {
             return false;
         }
         Quiz other = (Quiz) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -118,7 +197,7 @@ public class Quiz implements Serializable {
 
     @Override
     public String toString() {
-        return "org.devdom.quiz.model.dto.Quiz[ Id=" + id + " ]";
+        return "org.devdom.quiz.model.dto.Quiz[ Id=" + getId() + " ]";
     }
     
 }
