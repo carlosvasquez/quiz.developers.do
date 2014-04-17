@@ -4,19 +4,34 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
         <ui:composition template="template/layout.xhtml">
             <ui:define name="content">
                 <c:choose>
                     <c:when test="#{fb.administrator or fb.creator or fb.editor or fb.owner}">
                         <h:form>
                             <c:choose>
+                                <!-- Mostrar todos los cuestionarios si el usuario es de rol administrador -->
                                 <c:when test="#{fb.administrator}">
-                                    <h:outputText value="#{quiz.allQuiz.size()}"/>
-                                    <p:dataList value="#{quiz.allQuiz}" var="list" itemType="disc">
-                                        #{list.name}
-                                    </p:dataList>
+                                    <p:dataTable id="quizList" var="list" value="#{quiz.allQuiz}"
+                                                 paginator="true" rows="10" 
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15">
+                                        <f:facet name="header">  
+                                            Cuestionarios (#{quiz.allQuiz.size()}) 
+                                        </f:facet> 
+                                        <p:column>  
+                                            <f:facet name="header">  
+                                                <h:outputText value="nombre" />  
+                                            </f:facet>  
+                                            <h:outputText value="#{list.name}" />  
+                                        </p:column>
+                                    </p:dataTable>
                                 </c:when>
+                                <c:otherwise>
+                                    No puede ver el contenido de esta pàgina
+                                </c:otherwise>
                             </c:choose>
                         </h:form>
                     </c:when>
