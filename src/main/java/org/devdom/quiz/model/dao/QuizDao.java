@@ -25,7 +25,7 @@ public class QuizDao {
         return emf.getEntityManager();
     }
 
-    public List<Quiz> getAllQuiz() throws Exception, ClassCastException{
+    public List<Quiz> findAllQuiz() throws Exception, ClassCastException{
         EntityManager em = getEntityManager();
         try{
             return (List<Quiz>) (Quiz) em.createNamedQuery("Quiz.findAllQuiz")
@@ -37,7 +37,7 @@ public class QuizDao {
         }
     }
     
-    public List<Quiz> getAllQuizByUserId(long userId) throws Exception, ClassCastException{
+    public List<Quiz> findAllQuizByUserId(long userId) throws Exception, ClassCastException{
         EntityManager em = getEntityManager();
         try{
             return (List<Quiz>) (Quiz) em.createNamedQuery("Quiz.findAllQuizByUserId")
@@ -49,22 +49,7 @@ public class QuizDao {
             }
         }
     }
-
-    public List<Quiz> getList(){
-
-        List<Quiz> list = null;
-        EntityManager em = null;
-
-        try{
-            em = emf.getEntityManager();
-            list = em.createNamedQuery("Quiz.findAll").getResultList();
-        }finally{
-            if(em!=null|em.isOpen())
-                em.close();
-        }
-        return list;
-    }
-    
+ 
     public void create(Quiz quiz) {
         EntityManager em = null;
         try {
