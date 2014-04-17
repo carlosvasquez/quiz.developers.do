@@ -16,21 +16,41 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.annotations.Direction;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQueries;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQuery;
+import org.eclipse.persistence.annotations.StoredProcedureParameter;
 
 /**
  *
  * @author Carlos Vasquez Polanco
  */
-
 @Entity
-@Table(name = "skillset_quiz")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Quiz.findAll", query = "SELECT q FROM Quiz q"),
-    @NamedQuery(name = "Quiz.findById", query = "SELECT q FROM Quiz q WHERE q.id = :id"),
-    @NamedQuery(name = "Quiz.findByName", query = "SELECT q FROM Quiz q WHERE q.name = :name"),
-    @NamedQuery(name = "Quiz.findByCreationDate", query = "SELECT q FROM Quiz q WHERE q.creationDate = :creationDate"),
-    @NamedQuery(name = "Quiz.findByOwner", query = "SELECT q FROM Quiz q WHERE q.owner = :owner")})
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery( name="Developer.findProfileAuthorizationByFBId", 
+                                procedureName="findProfileAuthorizationByFBId",
+                                returnsResultSet=true,
+                                resultClass=Developer.class,
+                                parameters={@StoredProcedureParameter(queryParameter="fb_id",
+                                                                      name="fb_id",
+                                                                      direction=Direction.IN,
+                                                                      type=String.class)}
+                                ),
+    @NamedStoredProcedureQuery( name="Developer.updAuthorizationByUidAndAuthorizationCode", 
+                                procedureName="updAuthorizationByUidAndAuthorizationCode",
+                                returnsResultSet=true,
+                                resultClass=Developer.class,
+                                parameters={@StoredProcedureParameter(queryParameter="fb_id",
+                                                                      name="fb_id",
+                                                                      direction=Direction.IN,
+                                                                      type=Long.class),
+                                            @StoredProcedureParameter(queryParameter="authorization_code",
+                                                                      name="authorization_code",
+                                                                      direction=Direction.IN,
+                                                                      type=String.class)}
+                                )
+})
 public class Quiz implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,7 +69,7 @@ public class Quiz implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "owner")
-    private int owner;
+    private long owner;
     @Column(name = "user_id")
     private int userId;
     @Column(name = "full_name")
@@ -58,7 +78,6 @@ public class Quiz implements Serializable {
     private int statusId;
     @Column(name = "status")
     private String status;
-            
 
     public Quiz() {
     }
@@ -167,11 +186,11 @@ public class Quiz implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public int getOwner() {
+    public long getOwner() {
         return owner;
     }
 
-    public void setOwner(int owner) {
+    public void setOwner(long owner) {
         this.owner = owner;
     }
 
