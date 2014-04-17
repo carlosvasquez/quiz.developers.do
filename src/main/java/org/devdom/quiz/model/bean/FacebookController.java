@@ -81,7 +81,7 @@ public class FacebookController implements Serializable{
     public boolean isDevdoMember(){
         facesContext = FacesContext.getCurrentInstance();
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        return (boolean) session.getAttribute("devdo_member");
+        return (session.getAttribute("devdo_member") == null)?false: (boolean) session.getAttribute("devdo_member");
     }
     
     public void setAuthorized(){
@@ -115,7 +115,6 @@ public class FacebookController implements Serializable{
     public String getLoggedName(){
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
         FacebookProfile profile = (FacebookProfile) session.getAttribute("profile");
-        System.out.println("profile --> " + profile);
         if(profile==null)
             return "";
         if(profile.getFirstName()==null || profile.getLastName()==null)
