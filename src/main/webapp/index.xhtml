@@ -8,9 +8,10 @@
             <ui:define name="content">
                 <h:form>
                     <c:choose>                        
-                        <c:when test="#{fbconnect.logged}">
+                        <c:when test="#{fb.logged}">
                             <c:choose>
-                                <c:when test="#{fbconnect.authorized}">
+                                <c:when test="#{fb.authorized}">
+                                    <br/>
                                     Bienvenido!
                                 </c:when>
                                 <c:otherwise>
