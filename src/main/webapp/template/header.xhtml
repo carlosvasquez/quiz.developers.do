@@ -8,11 +8,11 @@
             <div id="logo" style="padding-top:15px;"><img src="http://developers.do/wp-content/uploads/2012/06/logo.png"/></div>
             <div id="top-menu">
                 <c:choose>                        
-                    <c:when test="#{fbconnect.logged}">
+                    <c:when test="#{fb.logged}">
                         <p:tabMenu activeIndex="#{admin.activeIndex}">
                             <p:menuitem value="Inicio" action="welcome" icon="ui-icon-home" />
                             <p:menuitem value="Perfil" action="profile" icon="ui-icon-person" />
-                            <c:if test="#{fbconnect.administrator or fbconnect.creator or fbconnect.editor or fbconnect.owner}">
+                            <c:if test="#{fb.administrator or fb.creator or fb.editor or fb.owner}">
                                 <p:menuitem value="Administraciòn" outcome="administration" icon="ui-icon-wrench"/>
                             </c:if>
                         </p:tabMenu>

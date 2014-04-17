@@ -7,7 +7,7 @@
     <application> </application> 
     
     <managed-bean>
-        <managed-bean-name>fbconnect</managed-bean-name>
+        <managed-bean-name>fb</managed-bean-name>
         <managed-bean-class>org.devdom.quiz.model.bean.FacebookController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
@@ -22,7 +22,7 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>quizBean</managed-bean-name>
+        <managed-bean-name>quiz</managed-bean-name>
         <managed-bean-class>org.devdom.quiz.model.bean.QuizController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
@@ -36,10 +36,10 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>index.xhtml</from-view-id>
+        <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>administration</from-outcome>
-            <to-view-id>administration.xhtml</to-view-id>
+            <to-view-id>/administration.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
