@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -28,27 +25,17 @@ import org.eclipse.persistence.annotations.StoredProcedureParameter;
 @Entity
 @XmlRootElement
 @NamedStoredProcedureQueries({
-    @NamedStoredProcedureQuery( name="Developer.findProfileAuthorizationByFBId", 
-                                procedureName="findProfileAuthorizationByFBId",
+    @NamedStoredProcedureQuery( name="Quiz.findAllQuiz", 
+                                procedureName="findAllQuiz",
                                 returnsResultSet=true,
-                                resultClass=Developer.class,
-                                parameters={@StoredProcedureParameter(queryParameter="fb_id",
-                                                                      name="fb_id",
-                                                                      direction=Direction.IN,
-                                                                      type=String.class)}
-                                ),
-    @NamedStoredProcedureQuery( name="Developer.updAuthorizationByUidAndAuthorizationCode", 
-                                procedureName="updAuthorizationByUidAndAuthorizationCode",
+                                resultClass=Quiz.class),
+    @NamedStoredProcedureQuery( name="Quiz.findAllQuizByUserId", 
+                                procedureName="findAllQuizByUserId",
                                 returnsResultSet=true,
-                                resultClass=Developer.class,
+                                resultClass=Quiz.class,
                                 parameters={@StoredProcedureParameter(queryParameter="fb_id",
-                                                                      name="fb_id",
                                                                       direction=Direction.IN,
-                                                                      type=Long.class),
-                                            @StoredProcedureParameter(queryParameter="authorization_code",
-                                                                      name="authorization_code",
-                                                                      direction=Direction.IN,
-                                                                      type=String.class)}
+                                                                      type=long.class)}
                                 )
 })
 public class Quiz implements Serializable {

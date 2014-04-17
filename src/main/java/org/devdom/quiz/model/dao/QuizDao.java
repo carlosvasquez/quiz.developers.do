@@ -3,7 +3,6 @@ package org.devdom.quiz.model.dao;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-//import org.devdom.quiz.controller.QuizController;
 import org.devdom.quiz.model.dto.Quiz;
 import org.devdom.quiz.util.EntityManagerFactory;
 
@@ -20,6 +19,35 @@ public class QuizDao {
     
     public QuizDao(){
         emf = new EntityManagerFactory();
+    }
+    
+    public EntityManager getEntityManager(){
+        return emf.getEntityManager();
+    }
+
+    public List<Quiz> getAllQuiz() throws Exception, ClassCastException{
+        EntityManager em = getEntityManager();
+        try{
+            return (List<Quiz>) (Quiz) em.createNamedQuery("Quiz.findAllQuiz")
+                    .getResultList();
+        }finally{
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
+    public List<Quiz> getAllQuizByUserId(long userId) throws Exception, ClassCastException{
+        EntityManager em = getEntityManager();
+        try{
+            return (List<Quiz>) (Quiz) em.createNamedQuery("Quiz.findAllQuizByUserId")
+                    .setParameter("fb_id", userId)
+                    .getResultList();
+        }finally{
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public List<Quiz> getList(){
