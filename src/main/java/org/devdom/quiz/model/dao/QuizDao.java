@@ -10,7 +10,7 @@ import org.devdom.quiz.util.EntityManagerFactory;
  *
  * @author Carlos Vasquez Polanco
  */
-public class QuizDao {
+public class QuizDao{
 
     private static final long serialVersionUID = 1L;
     private final EntityManagerFactory emf;
@@ -28,7 +28,7 @@ public class QuizDao {
     public List<Quiz> findAllQuiz() throws Exception, ClassCastException{
         EntityManager em = getEntityManager();
         try{
-            return (List<Quiz>) (Quiz) em.createNamedQuery("Quiz.findAllQuiz")
+            return (List<Quiz>) em.createNamedQuery("Quiz.findAllQuiz")
                     .getResultList();
         }finally{
             if (em != null) {
@@ -40,7 +40,7 @@ public class QuizDao {
     public List<Quiz> findAllQuizByUserId(long userId) throws Exception, ClassCastException{
         EntityManager em = getEntityManager();
         try{
-            return (List<Quiz>) (Quiz) em.createNamedQuery("Quiz.findAllQuizByUserId")
+            return (List<Quiz>) em.createNamedQuery("Quiz.findAllQuizByUserId")
                     .setParameter("fb_id", userId)
                     .getResultList();
         }finally{
