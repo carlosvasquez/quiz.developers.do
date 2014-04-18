@@ -65,6 +65,10 @@ public class Quiz implements Serializable {
     private int statusId;
     @Column(name = "status")
     private String status;
+    @Column(name = "skill_id")
+    private Integer skillId;
+    @Column(name = "skill")
+    private String skill;
 
     public Quiz() {
     }
@@ -204,6 +208,34 @@ public class Quiz implements Serializable {
     @Override
     public String toString() {
         return "org.devdom.quiz.model.dto.Quiz[ Id=" + getId() + " ]";
+    }
+
+    /**
+     * @return the skillId
+     */
+    public Integer getSkillId() {
+        return skillId;
+    }
+
+    /**
+     * @param skillId the skillId to set
+     */
+    public void setSkillId(Integer skillId) {
+        this.skillId = skillId;
+    }
+
+    /**
+     * @return the skill
+     */
+    public String getSkill() {
+        return skill;
+    }
+
+    /**
+     * @param skill the skill to set
+     */
+    public void setSkill(String skill) {
+        this.skill = skill;
     }
     
 }
