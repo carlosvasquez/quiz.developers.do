@@ -41,6 +41,14 @@ public class ValidationCode  implements Serializable{
         
     }
 
+    public void save(ActionEvent actionEvent){
+        try{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("code " + code + "!"));
+        }catch(javax.el.ELException ex){
+            System.out.println("mensaje:"+ ex.getMessage());
+        }
+    }
+    
     public void check(ActionEvent actionEvent) {
         fbController = new FacebookController();
         FacesContext facesContext = FacesContext.getCurrentInstance(); 
