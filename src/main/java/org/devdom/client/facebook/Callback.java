@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.devdom.quiz.model.bean.FacebookController;
 import org.devdom.quiz.model.dao.DeveloperDao;
 import org.devdom.quiz.model.dto.Developer;
@@ -32,14 +33,14 @@ public class Callback extends HttpServlet{
         
         try {
             facebook.getOAuthAccessToken(oauthCode);
-            setProfile(request,facebook);
+            setProfile(request,response,facebook);
         } catch (FacebookException e) {
             throw new ServletException(e);
         }
         response.sendRedirect(request.getContextPath() + "/");
     }
     
-    private void setProfile(HttpServletRequest request, Facebook facebook){
+    private void setProfile(HttpServletRequest request, HttpServletResponse response, Facebook facebook){
         FacebookProfile profile = new FacebookProfile();
         try {
             String query = "SELECT uid, first_name, last_name, name, birthday_date, email, pic_big, sex FROM user WHERE uid = me() ";
@@ -64,19 +65,27 @@ public class Callback extends HttpServlet{
             
             DeveloperDao developerDao = new DeveloperDao();
             Developer developer = developerDao.findProfileAuthorizationByFBId(profile.getUid());
-
-            if(developer.getUid()!=0){
-                request.getSession().setAttribute("devdo_member",true);
-                request.getSession().setAttribute("quiz_authorized", developer.isQuizAuthorized());
-                request.getSession().setAttribute("quiz_auth_code", developer.getAuthorizationCode());
-                request.getSession().setAttribute("user_roles", developer.getRoles());
+            HttpSession session = request.getSession();
+            
+            if(developer==null){
+                try {
+                    request.getSession().invalidate();
+                    response.sendRedirect("index.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(Callback.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
-                request.getSession().setAttribute("devdo_member",false);
+                if(developer.getUid()!=0){                
+                    session.setAttribute("devdo_member",true);
+                    session.setAttribute("quiz_authorized", developer.isQuizAuthorized());
+                    session.setAttribute("quiz_auth_code", developer.getAuthorizationCode());
+                    session.setAttribute("user_roles", developer.getRoles());
+                }else{
+                    session.setAttribute("devdo_member",false);
+                }
             }
         } catch (FacebookException ex) {
             Logger.getLogger(FacebookController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(Callback.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
