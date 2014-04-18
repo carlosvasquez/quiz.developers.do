@@ -20,12 +20,15 @@ public class DeveloperDao {
         return emf.getEntityManager();
     }
     
-    public Developer findProfileAuthorizationByFBId(Long uid) throws Exception, ClassCastException{
+    public Developer findProfileAuthorizationByFBId(Long uid){
         EntityManager em = getEntityManager();
         try{
-            return (Developer) em.createNamedQuery("Developer.findProfileAuthorizationByFBId")
+            return ((Developer) em.createNamedQuery("Developer.findProfileAuthorizationByFBId")
                     .setParameter("fb_id", uid)
-                    .getSingleResult();
+                    .getSingleResult());
+        } catch (ClassCastException ex) {
+            System.out.println("error casting!!!");
+            return null;
         }finally{
             if (em != null) {
                 em.close();
