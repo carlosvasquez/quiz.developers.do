@@ -30,7 +30,7 @@
     position: absolute;
     right:0px;
     top: 15px;
-    width:30%;
+    width:350px;
 }
 
 .circularProfileImage{
@@ -38,4 +38,16 @@
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border:solid 3px #0033DA;
+}
+
+#fbbutton{
+    -moz-user-select: none;
+    background: #2A49A5;
+    border: 1px solid #082783;
+    box-shadow: 0 1px #4C6BC7 inset;
+    color: white;
+    padding: 3px 5px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 #082783;
+    font: 15px Verdana, sans-serif;
 }
