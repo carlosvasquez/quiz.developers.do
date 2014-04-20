@@ -14,18 +14,27 @@
                             <c:choose>
                                 <!-- Mostrar todos los cuestionarios si el usuario es de rol administrador -->
                                 <c:when test="#{fb.administrator}">
+                                    <p:growl id="growl" showDetail="true"/>
                                     <p:dataTable id="quizList" var="list" value="#{quiz.allQuiz}"
-                                                 paginator="true" rows="10" 
-                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                 rowsPerPageTemplate="5,10,15">
-                                        <f:facet name="header">  
-                                            Cuestionarios (#{quiz.allQuiz.size()}) 
-                                        </f:facet> 
-                                        <p:column>  
+                                                paginator="true" rows="10" 
+                                                rowsPerPageTemplate="10,50,100"
+                                                selection="#{quiz.selectedQuiz}"
+                                                rowKey="#{list.id}"
+                                                selectionMode="single">
+                                        <f:facet name="header">Cuestionarios (#{quiz.allQuiz.size()})</f:facet> 
+                                        
+                                        <p:ajax event="rowSelect" listener="#{quiz.onRowSelect}" update=":mainForm:growl"/>
+                                        <!--
+                                        <p:ajax event="rowUnselect" 
+                                                listener="#{quiz.onRowUnselect}" 
+                                                update=":form:growl"/>
+                                        -->
+                                        <p:column>
                                             <f:facet name="header">  
                                                 <h:outputText value="nombre" />  
                                             </f:facet>  
-                                            <h:outputText value="#{list.name}" />  
+                                            <h:outputText value="#{list.name}" />,   
+                                            <h:outputText value="#{list.skill}" />
                                         </p:column>
                                     </p:dataTable>
                                 </c:when>
@@ -36,7 +45,7 @@
                         </h:form>
                     </c:when>
                     <c:otherwise>
-                        <a href="signin">Iniciar sesiòn con facebook</a> <br/>
+                        <a id="fbbutton" href="signin">Iniciar sesión con facebook</a> <br/>
                     </c:otherwise>
                 </c:choose>
             </ui:define>
