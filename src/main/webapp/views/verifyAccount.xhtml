@@ -8,8 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition>
-            <p:layoutUnit position="center">                        
-                
+            <p:layoutUnit position="center">
                     <c:choose>
                         <c:when test="#{fbconnect.devdoMember}">
                             <h:form id="validate">
@@ -19,7 +18,7 @@
                                         <f:facet name="header">  
                                             <p:messages id="msg" />  
                                         </f:facet>
-                                        <h:outputLabel for="code" value="Còdigo > " />  
+                                        <h:outputLabel for="code" value="Còdigo > " />
                                         <p:inputText id="code" value="#{validateCode.code}" required="true">
                                             <f:validateLength minimum="5"/>
                                         </p:inputText>
