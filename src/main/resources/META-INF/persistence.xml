@@ -4,6 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>org.devdom.quiz.model.dto.Quiz</class>
     <class>org.devdom.quiz.model.dto.Developer</class>
+    <class>org.devdom.quiz.model.dto.Questions</class>
+    <class>org.devdom.quiz.model.dto.Skills</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <validation-mode>CALLBACK</validation-mode>
     <properties>
       <property name="eclipselink.jpa.uppercase-column-names" value="true"/>
