@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.annotations.Direction;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQueries;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQuery;
+import org.eclipse.persistence.annotations.StoredProcedureParameter;
 
 /**
  *
@@ -17,27 +21,40 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
+@NamedStoredProcedureQueries({
+    @NamedStoredProcedureQuery( name="Questions.findAllQuestionsByQuizId", 
+                                procedureName="findAllQuestionsByQuizId",
+                                returnsResultSet=true,
+                                resultClass=Quiz.class,
+                                parameters={@StoredProcedureParameter(queryParameter="quiz_id",
+                                                                      direction=Direction.IN,
+                                                                      type=long.class)}
+                                )
+})
 public class Questions implements Serializable{
-    
-    /*
-    @Column(name = "uid")
-    */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Column(name = "question")
     private String question;
+    
     @Column(name = "creation_date")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date creationDate;
+    
     @Column(name = "skill_id")
     private Integer skillId;
+    
     @Column(name = "owner")
     private Integer owner;
+    
     @Column(name = "quiz_id")
     private Integer quizId;
+    
     @Column(name = "status_id")
     private int statusId;
     
