@@ -2,12 +2,14 @@ package org.devdom.quiz.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -39,36 +41,50 @@ import org.eclipse.persistence.annotations.StoredProcedureParameter;
                                 )
 })
 public class Quiz implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "quiz_id")
     private Integer id;
+
     @Size(max = 300)
     @Column(name = "name")
     private String name;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "owner")
     private long owner;
+
     @Column(name = "user_id")
     private int userId;
+
     @Column(name = "full_name")
     private String fullName;
+
     @Column(name = "status_id")
     private int statusId;
+
     @Column(name = "status")
     private String status;
+
     @Column(name = "skill_id")
     private Integer skillId;
+
     @Column(name = "skill")
     private String skill;
+
+    @OneToMany
+    private List<Questions> questions;
 
     public Quiz() {
     }
@@ -82,8 +98,8 @@ public class Quiz implements Serializable {
         this.creationDate = creationDate;
         this.owner = owner;
     }
-
-        /**
+    
+    /**
      * @return the id
      */
     public Integer getId() {
@@ -236,6 +252,20 @@ public class Quiz implements Serializable {
      */
     public void setSkill(String skill) {
         this.skill = skill;
+    }
+
+    /**
+     * @return the questions
+     */
+    public List<Questions> getQuestions() {
+        return questions;
+    }
+
+    /**
+     * @param questions the questions to set
+     */
+    public void setQuestions(List<Questions> questions) {
+        this.questions = questions;
     }
     
 }
