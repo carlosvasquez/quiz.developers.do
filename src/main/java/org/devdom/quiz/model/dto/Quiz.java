@@ -83,9 +83,6 @@ public class Quiz implements Serializable {
     @Column(name = "skill")
     private String skill;
 
-    @OneToMany
-    private List<Questions> questions;
-
     public Quiz() {
     }
 
@@ -253,19 +250,4 @@ public class Quiz implements Serializable {
     public void setSkill(String skill) {
         this.skill = skill;
     }
-
-    /**
-     * @return the questions
-     */
-    public List<Questions> getQuestions() {
-        return questions;
-    }
-
-    /**
-     * @param questions the questions to set
-     */
-    public void setQuestions(List<Questions> questions) {
-        this.questions = questions;
-    }
-    
 }
