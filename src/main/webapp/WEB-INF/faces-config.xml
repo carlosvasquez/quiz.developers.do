@@ -26,7 +26,10 @@
         <managed-bean-class>org.devdom.quiz.model.bean.QuizController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
-    
+    <managed-bean>
+        <managed-bean-name>questions</managed-bean-name>
+        <managed-bean-class>org.devdom.quiz.model.bean.QuestionsController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
