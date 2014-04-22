@@ -1,10 +1,12 @@
 package org.devdom.quiz.model.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.devdom.quiz.model.dao.QuestionDao;
@@ -32,7 +34,7 @@ public class QuizController implements SelectableDataModel<Quiz>{
     private Quiz quiz;
     private final QuizDao quizDao = new QuizDao();
     private Quiz selectedQuiz;
-    private List<Questions> questions;
+    private List<Questions> questions = new ArrayList<Questions>();;
     
     private void reset(){
         quiz = null;
@@ -60,18 +62,15 @@ public class QuizController implements SelectableDataModel<Quiz>{
         return null;
     }
     
-    public void onRowSelect(SelectEvent event) {
-        System.out.println("select!");
-        System.out.println("nombre: "+ ((Quiz) event.getObject()).getId());
-
+    public void onRowSelect(SelectEvent event){
         Integer quizId = ((Quiz) event.getObject()).getId();
+
         try {
-            questions = (List<Questions>) (Questions) (new QuestionDao()).findAllQuestionsByQuizId(quizId);
-            System.out.println("cantidad de preguntas " + questions.size());
+            QuestionDao questionDao = new QuestionDao();
+            setQuestions( (List<Questions>) questionDao.findAllQuestionsByQuizId(quizId));
         } catch (Exception ex) {
             Logger.getLogger(QuizController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     public void onRowUnselect(UnselectEvent event) {
