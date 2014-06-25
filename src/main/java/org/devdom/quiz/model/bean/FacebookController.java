@@ -6,6 +6,7 @@ import facebook4j.internal.org.json.JSONArray;
 import facebook4j.internal.org.json.JSONException;
 import facebook4j.internal.org.json.JSONObject;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.devdom.quiz.model.dto.FacebookProfile;
+import org.devdom.quiz.model.dto.Questions;
 import org.devdom.quiz.util.Configuration;
 
 /**
@@ -28,6 +30,7 @@ public class FacebookController implements Serializable{
     
     private FacesContext facesContext = FacesContext.getCurrentInstance();
     private HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+    private List<Questions> questions = null;
 
     public String getAuthorizationCode(){
         facesContext = FacesContext.getCurrentInstance();
@@ -103,13 +106,15 @@ public class FacebookController implements Serializable{
     }
     
     public String getProfilePicture(){
+        /*
         session = (HttpSession) facesContext.getExternalContext().getSession(true);
         FacebookProfile profile = (FacebookProfile) session.getAttribute("profile");
         if(profile==null)
             return "";
         if(profile.getPic_with_logo()==null)
             return "";
-        return profile.getPic_with_logo();
+        return profile.getPic_with_logo();*/
+        return "https://graph.facebook.com/710605599/picture?height=420&amp;width=420";
     }
     
     public String getLoggedName(){
