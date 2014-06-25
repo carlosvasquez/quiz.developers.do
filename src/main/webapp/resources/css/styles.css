@@ -34,9 +34,6 @@
 }
 
 .circularProfileImage{
-    border-radius: 100px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
     border:solid 3px #0033DA;
 }
 

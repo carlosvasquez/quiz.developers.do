@@ -10,52 +10,8 @@
             <ui:define name="content">
                 <c:choose>
                     <c:when test="#{fb.administrator or fb.creator or fb.editor or fb.owner}">
-                        <h:form>
-                            <c:choose>
-                                <!-- Mostrar todos los cuestionarios si el usuario es de rol administrador -->
-                                <c:when test="#{fb.administrator}">
-                                    <p:growl id="growl" showDetail="true"/>
-                                    <p:dataTable id="quizzes" var="list" value="#{quiz.allQuiz}"
-                                                paginator="true" rows="10" 
-                                                rowsPerPageTemplate="10,50,100"
-                                                selection="#{quiz.selectedQuiz}"
-                                                rowKey="#{list.id}"
-                                                selectionMode="single">
-                                        <f:facet name="header">Cuestionarios (#{quiz.allQuiz.size()})</f:facet> 
-                                        
-                                        <p:ajax event="rowSelect" 
-                                                listener="#{quiz.onRowSelect}" update="questionList"
-                                                />
-                                        <!--update=":mainForm:growl"
-                                        <p:ajax event="rowUnselect" 
-                                                listener="#{quiz.onRowUnselect}" 
-                                                update=":form:growl"/>
-                                        -->
-                                        <p:column>
-                                            <f:facet name="header">  
-                                                <h:outputText value="nombre" />  
-                                            </f:facet>  
-                                            <h:outputText value="#{list.name}" />,   
-                                            <h:outputText value="#{list.skill}" />
-                                        </p:column>
-                                    </p:dataTable>
-                                    <br/><br/>
-                                    <p:dataTable id="questionList" var="question" value="#{quiz.questions}"
-                                                 paginator="true" rows="10" 
-                                                 rowsPerPageTemplate="10,50,100"
-                                                 selectionMode="single">
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="nombre" />  
-                                            </f:facet>
-                                            <h:outputText value="#{question.question}" />,
-                                        </p:column>
-                                    </p:dataTable>
-                                </c:when>
-                                <c:otherwise>
-                                    No puede ver el contenido de esta pàgina
-                                </c:otherwise>
-                            </c:choose>
+                        <h:form id="frm">
+                            
                         </h:form>
                     </c:when>
                     <c:otherwise>
